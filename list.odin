@@ -17,13 +17,13 @@ Add :: proc(list: ^List($T), value: T) {
 
 // Adds a value to the end of a list.
 Append_Value :: proc(list: ^List($T), value: T) {
-    List_Add(list, value)
+    Add(list, value)
 }
 
 // Adds a list to the end of a list.
 Append_List :: proc(list: ^List($T), list2: [dynamic]T) {
     for value in List {
-        List_Append_Value(&list.data, value)
+        Append_Value(&list.data, value)
     }
 }
 
@@ -50,7 +50,7 @@ Append :: proc{
 
 // Add something to the end of a list.
 PushBack :: proc(list: ^List($T), value: T) {
-    List_Add(list, value)
+    Add(list, value)
 }
 
 // Get the length of a list.
@@ -74,28 +74,28 @@ Get :: proc(list: ^List($T), index: u32) -> T {
 }
 
 // Get the value at the beginning of a list.
-List_Front :: proc(list: ^List($T), index: u32) -> T {
+Front :: proc(list: ^List($T), index: u32) -> T {
     return list.data[0]
 }
 
 // Get the value at the end of a list.
 Back :: proc(list: ^List($T), index: u32) -> T {
-    return list.data[List_Length(list) - 1]
+    return list.data[Length(list) - 1]
 }
 
 // Get the last value of a list, and remove it from said list.
 PopBack :: proc(list: ^List($T)) -> T {
-    listSize: u32 = List_Length(list)
-    result: T = List_At(list, listSize - 1)
-    List_Remove(list, listSize - 1)
+    listSize: u32 = Length(list)
+    result: T = At(list, listSize - 1)
+    Remove(list, listSize - 1)
     return result
 }
 
 // Get the first value of a list, and remove it from said list.
 PopFront :: proc(list: ^List($T)) -> T {
-    listSize: u32 = List_Length(list)
-    result: T = List_At(list, listSize - 1)
-    List_Remove(list, listSize - 1)
+    listSize: u32 = Length(list)
+    result: T = At(list, listSize - 1)
+    Remove(list, listSize - 1)
     return result
 }
 
