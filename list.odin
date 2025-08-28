@@ -22,9 +22,7 @@ Append_Value :: proc(list: ^List($T), value: T) {
 
 // Adds a list to the end of a list.
 Append_List :: proc(list: ^List($T), list2: [dynamic]T) {
-    for value in List {
-        Append_Value(&list.data, value)
-    }
+    append_elems(list, list2)
 }
 
 // Inserts a value into a list at a specific index.
@@ -85,18 +83,12 @@ Back :: proc(list: ^List($T), index: u32) -> T {
 
 // Get the last value of a list, and remove it from said list.
 PopBack :: proc(list: ^List($T)) -> T {
-    listSize: u32 = Length(list)
-    result: T = At(list, listSize - 1)
-    Remove(list, listSize - 1)
-    return result
+    return pop(list)
 }
 
 // Get the first value of a list, and remove it from said list.
 PopFront :: proc(list: ^List($T)) -> T {
-    listSize: u32 = Length(list)
-    result: T = At(list, listSize - 1)
-    Remove(list, listSize - 1)
-    return result
+    return pop_front(list)
 }
 
 // Clear a list of all values.
